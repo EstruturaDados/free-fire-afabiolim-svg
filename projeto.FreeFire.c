@@ -42,6 +42,15 @@ int main(){
                     fgets(mochila[total].tipo, sizeof(mochila[total].tipo), stdin);
                     mochila[total].tipo[strcspn(mochila[total].tipo, "\n")] = '\0';
 
-                    
+                    printf("Quantidade: ");
+                    scanf("%d", &mochila[total].quantidade);
+                    getchar();
+
+                    total++;
+                    printf(" Item adicionado com sucesso!\n");
+                }
+                break;
+                 
+
     
 }
