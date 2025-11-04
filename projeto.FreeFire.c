@@ -6,7 +6,7 @@
 // Estrutura da mochila
 typedef struct {
     char nome[30];
-    char tipo[20];
+    char tipo[15];
     int quantidade;
 } Item;
 
