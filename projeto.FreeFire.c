@@ -50,7 +50,21 @@ int main(){
                     printf(" Item adicionado com sucesso!\n");
                 }
                 break;
-                 
+              case 2: { // Remover item
+                    if (total == 0){
+                        printf("\n Mochila vazia! nenhum item.\n");
+                    } else{
+                        char nomeRemover[30];
+                        intencontrado = 0;
+
+                    printf("\n🗑️ Digite o nome do item a remover: ");
+                    fgets(nomeRemover, sizeof(nomeRemover), stdin);
+                    nomeRemover[strcspn(nomeRemover, "\n")] = '\0';
+                    }
+                    {
+                        
+                    }
+                    
 
     
 }
