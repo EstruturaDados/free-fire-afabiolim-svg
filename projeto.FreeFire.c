@@ -18,7 +18,7 @@ int main(){
     int opcao;
 
     do {
-        printf("\n========== 🏝️ CODIGO DA ILHA - NIVEL NOVATO 🏝️ ==========\n");
+        printf("\n======= CODIGO DA ILHA NIVEL NOVATO ========\n");
         printf("1. Adicionar item\n");
         printf("2. Remover item\n");
         printf("3. Listar itens\n");
@@ -55,12 +55,27 @@ int main(){
                         printf("\n Mochila vazia! nenhum item.\n");
                     } else{
                         char nomeRemover[30];
-                        intencontrado = 0;
+                        int encontrado = 0;
 
-                    printf("\n🗑️ Digite o nome do item a remover: ");
+                    printf("\n Digite o nome do item a remover: ");
                     fgets(nomeRemover, sizeof(nomeRemover), stdin);
                     nomeRemover[strcspn(nomeRemover, "\n")] = '\0';
+
+                     for (int i = 0; i < total; i++) {
+                        if (strcmp(mochila[i].nome, nomeRemover) == 0) {
+                            for (int j = i; j < total - 1; j++) {
+                                mochila[j] = mochila[j + 1];
+                            }
+                            total--;
+                            encontrado = 1;
+                            printf(" Item '%s' removido com sucesso!\n", nomeRemover);
+                            break;
+                        }
                     }
+
+                       if (!encontrado) {
+                        printf(" Item nao encontrado na mochila.\n");
+
                     {
                         
                     }
