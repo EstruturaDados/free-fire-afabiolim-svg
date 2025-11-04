@@ -19,7 +19,16 @@ int main(){
 
     do
     {
-        /* code */
+        printf("\n========== 🏝️ CODIGO DA ILHA - NIVEL NOVATO 🏝️ ==========\n");
+        printf("1. Adicionar item\n");
+        printf("2. Remover item\n");
+        printf("3. Listar itens\n");
+        printf("4. Sair\n");
+        printf("Escolha uma opcao: ");
+        scanf("%d", &opcao);
+        getchar(); // limpa o buffer
+
+        
     } while (condition);
     
 }
