@@ -10,3 +10,16 @@ typedef struct {
     char tipo[20];
     int quantidade;
 } Item;
+
+// Aricipal
+int main(){
+    Item mochila[MAX_ITENS];
+    int total = 0;
+    int opcao;
+
+    do
+    {
+        /* code */
+    } while (condition);
+    
+}
