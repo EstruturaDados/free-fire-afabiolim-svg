@@ -73,8 +73,8 @@ int main(){
                         }
                     }
 
-                       if (!encontrado) {
-                        printf(" Item nao encontrado na mochila.\n");
+                    if (!encontrado) {
+                    printf(" Item nao encontrado na mochila.\n");
                         
                     }
                     
@@ -82,5 +82,5 @@ int main(){
                 break;
             }
 
-            
+
 }
