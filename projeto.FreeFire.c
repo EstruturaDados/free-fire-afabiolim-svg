@@ -17,8 +17,7 @@ int main(){
     int total = 0;
     int opcao;
 
-    do
-    {
+    do {
         printf("\n========== 🏝️ CODIGO DA ILHA - NIVEL NOVATO 🏝️ ==========\n");
         printf("1. Adicionar item\n");
         printf("2. Remover item\n");
@@ -26,9 +25,23 @@ int main(){
         printf("4. Sair\n");
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
-        getchar(); // limpa o buffer
+        getchar();// limpa o buffer
 
-        
-    } while (condition);
+
+         switch (opcao) {
+            case 1: // Adicionar item
+                if (total >= MAX_ITENS) {
+                    printf("\n Mochila cheia! Nao e possivel adicionar mais itens.\n");
+                } else {
+                    printf("\n Adicionando novo item...\n");
+                    printf("Nome do item: ");
+                    fgets(mochila[total].nome, sizeof(mochila[total].nome), stdin);
+                    mochila[total].nome[strcspn(mochila[total].nome, "\n")] = '\0';
+
+                     printf("Tipo do item: ");
+                    fgets(mochila[total].tipo, sizeof(mochila[total].tipo), stdin);
+                    mochila[total].tipo[strcspn(mochila[total].tipo, "\n")] = '\0';
+
+                    
     
 }
