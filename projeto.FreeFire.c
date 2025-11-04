@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 
-
 #define MAX_ITENS 10
 
 // Estrutura da mochila
