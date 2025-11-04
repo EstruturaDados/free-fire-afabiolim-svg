@@ -50,18 +50,19 @@ int main(){
                     printf(" Item adicionado com sucesso!\n");
                 }
                 break;
-              case 2: { // Remover item
-                    if (total == 0){
-                        printf("\n Mochila vazia! nenhum item.\n");
-                    } else{
-                        char nomeRemover[30];
-                        int encontrado = 0;
+
+             case 2: { // Remover item
+                if (total == 0) {
+                    printf("\n Mochila vazia! Nenhum item para remover.\n");
+                } else {
+                    char nomeRemover[30];
+                    int encontrado = 0;
 
                     printf("\n Digite o nome do item a remover: ");
                     fgets(nomeRemover, sizeof(nomeRemover), stdin);
                     nomeRemover[strcspn(nomeRemover, "\n")] = '\0';
 
-                     for (int i = 0; i < total; i++) {
+                    for (int i = 0; i < total; i++) {
                         if (strcmp(mochila[i].nome, nomeRemover) == 0) {
                             for (int j = i; j < total - 1; j++) {
                                 mochila[j] = mochila[j + 1];
@@ -74,13 +75,34 @@ int main(){
                     }
 
                     if (!encontrado) {
-                    printf(" Item nao encontrado na mochila.\n");
-                        
+                        printf(" Item nao encontrado na mochila.\n");
                     }
-                    
-                  }
+                }
                 break;
             }
+            case 3: // Listar itens
+                if (total == 0) {
+                    printf("\n Mochila vazia.\n");
+                } else {
+                    printf("\n========Itens na Mochila =========\n");
+                    printf("%-20s %-15s %-10s\n", "Nome", "Tipo", "Quantidade");
+                    printf("-------------------------------------------\n");
+                    for (int i = 0; i < total; i++) {
+                        printf("%-20s %-15s %-10d\n",
+                               mochila[i].nome, mochila[i].tipo, mochila[i].quantidade);
+                    }
+                }
+                break;
 
+            case 4:
+                printf("\n Saindo do sistema... Boa sorte na Ilha!\n");
+                break;
 
+            default:
+                printf("\n Opcao invalida! Tente novamente.\n");
+        }
+
+    } while (opcao != 4);
+
+    return 0;
 }
