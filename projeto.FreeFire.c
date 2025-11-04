@@ -75,11 +75,12 @@ int main(){
 
                        if (!encontrado) {
                         printf(" Item nao encontrado na mochila.\n");
-
-                    {
                         
                     }
                     
+                  }
+                break;
+            }
 
-    
+            
 }
