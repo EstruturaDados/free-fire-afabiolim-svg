@@ -8,7 +8,7 @@ typedef struct {
     char tipo[15];
     int quantidade;
 } Item;
-// funçao
+
 int main() {
     Item mochila[MAX_ITENS];
     int total = 0;
@@ -25,7 +25,7 @@ int main() {
         scanf("%d", &opcao);
         getchar();
 
-         switch (opcao) {
+        switch (opcao) {
             case 1:
                 if (total < MAX_ITENS) {
                     printf("Nome do item: ");
@@ -46,3 +46,29 @@ int main() {
                     printf(" Mochila cheia!\n");
                 }
                 break;
+
+            case 2: {
+                if (total == 0) {
+                    printf(" Mochila vazia!\n");
+                } else {
+                    char nomeRemover[30];
+                    printf("Digite o nome do item para remover: ");
+                    fgets(nomeRemover, 30, stdin);
+                    nomeRemover[strcspn(nomeRemover, "\n")] = '\0';
+
+                    int encontrado = 0;
+                    for (int i = 0; i < total; i++) {
+                        if (strcmp(mochila[i].nome, nomeRemover) == 0) {
+                            for (int j = i; j < total - 1; j++)
+                                mochila[j] = mochila[j + 1];
+                            total--;
+                            encontrado = 1;
+                            printf(" Item removido!\n");
+                            break;
+                        }
+                    }
+                    if (!encontrado)
+                        printf(" Item nao encontrado.\n");
+                }
+                break;
+            }
