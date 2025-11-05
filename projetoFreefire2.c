@@ -23,7 +23,7 @@ int main() {
         printf("5. Sair\n");
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
-        getchar();
+        getchar(); // limpa o buffer do teclado
 
         switch (opcao) {
             case 1:
@@ -33,7 +33,7 @@ int main() {
                     mochila[total].nome[strcspn(mochila[total].nome, "\n")] = '\0';
 
                     printf("Tipo do item: ");
-                    fgets(mochila[total].tipo, 20, stdin);
+                    fgets(mochila[total].tipo, 15, stdin);
                     mochila[total].tipo[strcspn(mochila[total].tipo, "\n")] = '\0';
 
                     printf("Quantidade: ");
@@ -63,7 +63,7 @@ int main() {
                                 mochila[j] = mochila[j + 1];
                             total--;
                             encontrado = 1;
-                            printf(" Item removido!\n");
+                            printf("Item removido!\n");
                             break;
                         }
                     }
@@ -72,3 +72,56 @@ int main() {
                 }
                 break;
             }
+
+            case 3:
+                if (total == 0) {
+                    printf(" Mochila vazia!\n");
+                } else {
+                    printf("\n========= ITENS NA MOCHILA =========\n");
+                    printf("%-20s %-15s %-10s\n", "Nome", "Tipo", "Quantidade");
+                    printf("-------------------------------------------\n");
+                    for (int i = 0; i < total; i++) {
+                        printf("%-20s %-15s %-10d\n",
+                               mochila[i].nome, mochila[i].tipo, mochila[i].quantidade);
+                    }
+                }
+                break;
+
+            case 4: {
+                if (total == 0) {
+                    printf(" Mochila vazia!\n");
+                } else {
+                    char nomeBusca[30];
+                    printf("Digite o nome do item para buscar: ");
+                    fgets(nomeBusca, 30, stdin);
+                    nomeBusca[strcspn(nomeBusca, "\n")] = '\0';
+
+                    int encontrado = 0;
+                    for (int i = 0; i < total; i++) {
+                        if (strcmp(mochila[i].nome, nomeBusca) == 0) {
+                            printf("\n Item encontrado!\n");
+                            printf("Nome: %s\n", mochila[i].nome);
+                            printf("Tipo: %s\n", mochila[i].tipo);
+                            printf("Quantidade: %d\n", mochila[i].quantidade);
+                            encontrado = 1;
+                            break;
+                        }
+                    }
+                    if (!encontrado)
+                        printf(" Item nao encontrado.\n");
+                }
+                break;
+            }
+
+            case 5:
+                printf(" Saindo da ilha... Até mais, aventureiro!\n");
+                break;
+
+            default:
+                printf(" Opcao invalida!\n");
+        }
+
+    } while (opcao != 5);
+
+    return 0;
+}
