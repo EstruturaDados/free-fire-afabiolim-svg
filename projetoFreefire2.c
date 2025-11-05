@@ -8,3 +8,8 @@ typedef struct {
     char tipo[15];
     int quantidade;
 } Item;
+// funçao
+int main() {
+    Item mochila[MAX_ITENS];
+    int total = 0;
+    int opcao;
