@@ -24,3 +24,25 @@ int main() {
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
         getchar();
+
+         switch (opcao) {
+            case 1:
+                if (total < MAX_ITENS) {
+                    printf("Nome do item: ");
+                    fgets(mochila[total].nome, 30, stdin);
+                    mochila[total].nome[strcspn(mochila[total].nome, "\n")] = '\0';
+
+                    printf("Tipo do item: ");
+                    fgets(mochila[total].tipo, 20, stdin);
+                    mochila[total].tipo[strcspn(mochila[total].tipo, "\n")] = '\0';
+
+                    printf("Quantidade: ");
+                    scanf("%d", &mochila[total].quantidade);
+                    getchar();
+
+                    total++;
+                    printf(" Item adicionado!\n");
+                } else {
+                    printf(" Mochila cheia!\n");
+                }
+                break;
