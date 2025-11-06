@@ -62,3 +62,16 @@ void adicionarItem(Item mochila[], int *total) {
 }
 
 // Remove um item pelo nome
+// Desloca os itens seguintes para preencher o espaço.
+void removerItem(Item mochila[], int *total) {
+    if (*total == 0) {
+        printf(" Mochila vazia! Nada para remover.\n");
+        return;
+    }
+
+    char nomeRemover[30];
+    printf("Digite o nome do item para remover: ");
+    fgets(nomeRemover, sizeof(nomeRemover), stdin);
+    nomeRemover[strcspn(nomeRemover, "\n")] = '\0';
+
+    
