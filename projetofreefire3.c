@@ -5,7 +5,6 @@
 #define MAX_ITENS 10
 
 
-
 // Representa os criterios de ordenacao.
 typedef enum {
     ORDENAR_NOME = 1,
@@ -13,8 +12,7 @@ typedef enum {
     ORDENAR_PRIORIDADE
 } CriterioOrdenacao;
 
-// Estrutura que representa cada item da mochila.
-// nome, tipo, quantidade e prioridade (1 a 5).
+// Estrutura cada item da mochila.
 typedef struct {
     char nome[30];
     char tipo[20];
@@ -23,7 +21,7 @@ typedef struct {
 } Item;
 
 
-// Função para imprimir uma linha 
+// Função para imprimir uma linha
 void linha() {
     printf("------------------------------------------------------------\n");
 }
@@ -45,7 +43,7 @@ void adicionarItem(Item mochila[], int *total) {
         return;
     }
 
-    // Leitura dos campos do item
+    // Leitura dos item
     printf("Nome do item: ");
     fgets(mochila[*total].nome, sizeof(mochila[*total].nome), stdin);
     mochila[*total].nome[strcspn(mochila[*total].nome, "\n")] = '\0';
@@ -67,11 +65,10 @@ void adicionarItem(Item mochila[], int *total) {
 
     getchar(); // limpar o '\n' restante no buffer após scanf
     (*total)++;
-    printf(" Item adicionado com sucesso!\n");
+    printf("Item adicionado com sucesso!\n");
 }
 
 // Remove um item pelo nome.
-// desloca os itens seguintes para preencher o espaço.
 void removerItem(Item mochila[], int *total) {
     if (*total == 0) {
         printf(" Mochila vazia! Nada para remover.\n");
@@ -104,8 +101,7 @@ void removerItem(Item mochila[], int *total) {
     printf(" Item '%s' removido.\n", nomeRemover);
 }
 
-
-// Lista de itens na mochila
+// Lista todos os itens na mochila em formato de tabela simples.
 void listarItens(Item mochila[], int total) {
     if (total == 0) {
         printf(" Mochila vazia.\n");
@@ -124,22 +120,23 @@ void listarItens(Item mochila[], int total) {
 }
 
 
-// função ordena a mochila
+// função ordena a mochila 
 int ordenarMochila(Item mochila[], int total, CriterioOrdenacao criterio) {
     int comparacoes = 0;
 
     // Insertion sort: percorre do segundo elemento até o final
     for (int i = 1; i < total; i++) {
-        Item atual = mochila[i]; // elemento que vamos "inserir" na sublista ordenada
+        Item atual = mochila[i]; // elemento que vamos
         int j = i - 1;
 
         // Enquanto j >= 0 e a condicao de troca for verdadeira, deslocamos
         while (j >= 0) {
-            comparacoes++; // contamos cada comparacao feita para decidir se desloca
+            comparacoes++; // contamos cada comparacao 
 
-            bool deveDeslocar = false; // flag para determina se deslocamos da mochila
+            bool deveDeslocar = false; // flag que determina se deslocamos mochila
 
             if (criterio == ORDENAR_NOME) {
+                // strcmp > 0 significa mochila[j].nome > atual.nome (lexicograficamente)
                 if (strcmp(mochila[j].nome, atual.nome) > 0)
                     deveDeslocar = true;
             } else if (criterio == ORDENAR_TIPO) {
@@ -147,7 +144,7 @@ int ordenarMochila(Item mochila[], int total, CriterioOrdenacao criterio) {
                 if (strcmp(mochila[j].tipo, atual.tipo) > 0)
                     deveDeslocar = true;
                 else if (strcmp(mochila[j].tipo, atual.tipo) == 0) {
-                    // Critério secundário: se os tipos forem iguais, ordenar nome
+                    // Critério secundário: se os tipos forem iguais, ordenar por nome
                     if (strcmp(mochila[j].nome, atual.nome) > 0)
                         deveDeslocar = true;
                 }
@@ -156,7 +153,7 @@ int ordenarMochila(Item mochila[], int total, CriterioOrdenacao criterio) {
                 if (mochila[j].prioridade > atual.prioridade)
                     deveDeslocar = true;
                 else if (mochila[j].prioridade == atual.prioridade) {
-                    // Critério secundário: se prioridades iguais ordenar por nome
+                    // Critério secundário: se prioridades iguais, ordenar por nome
                     if (strcmp(mochila[j].nome, atual.nome) > 0)
                         deveDeslocar = true;
                 }
@@ -170,8 +167,12 @@ int ordenarMochila(Item mochila[], int total, CriterioOrdenacao criterio) {
             j--;
         }
 
-        mochila[j + 1] = atual; // insere o elemento na posiçã
+        mochila[j + 1] = atual; // insere o elemento na posição
     }
 
     return comparacoes;
+}
+
+
+    return 0;
 }
