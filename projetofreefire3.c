@@ -35,3 +35,30 @@ void adicionarItem(Item mochila[], int *total) {
         printf(" Mochila cheia! Nao e possivel adicionar mais itens.\n");
         return;
     }
+
+    // Leitura dos item
+    printf("Nome do item: ");
+    fgets(mochila[*total].nome, sizeof(mochila[*total].nome), stdin);
+    mochila[*total].nome[strcspn(mochila[*total].nome, "\n")] = '\0';
+
+    printf("Tipo do item: ");
+    fgets(mochila[*total].tipo, sizeof(mochila[*total].tipo), stdin);
+    mochila[*total].tipo[strcspn(mochila[*total].tipo, "\n")] = '\0';
+
+    printf("Quantidade: ");
+    scanf("%d", &mochila[*total].quantidade);
+
+    // Ler prioridade 1..5
+    do {
+        printf("Prioridade (1 a 5): ");
+        scanf("%d", &mochila[*total].prioridade);
+        if (mochila[*total].prioridade < 1 || mochila[*total].prioridade > 5)
+            printf("Prioridade invalida. Digite um valor entre 1 e 5.\n");
+    } while (mochila[*total].prioridade < 1 || mochila[*total].prioridade > 5);
+
+    getchar(); // limpar o '\n' restante no buffer após scanf
+    (*total)++;
+    printf("Item adicionado com sucesso!\n");
+}
+
+// Remove um item pelo nome
