@@ -103,3 +103,22 @@ void removerItem(Item mochila[], int *total) {
     (*total)--;
     printf(" Item '%s' removido.\n", nomeRemover);
 }
+
+
+// Lista de itens na mochila
+void listarItens(Item mochila[], int total) {
+    if (total == 0) {
+        printf(" Mochila vazia.\n");
+        return;
+    }
+
+    printf("\n%-25s %-15s %-10s %-10s\n", "Nome", "Tipo", "Quantidade", "Prioridade");
+    linha();
+    for (int i = 0; i < total; i++) {
+        printf("%-25s %-15s %-10d %-10d\n",
+               mochila[i].nome,
+               mochila[i].tipo,
+               mochila[i].quantidade,
+               mochila[i].prioridade);
+    }
+}
