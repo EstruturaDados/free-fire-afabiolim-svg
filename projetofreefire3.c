@@ -160,7 +160,7 @@ int ordenarMochila(Item mochila[], int total, CriterioOrdenacao criterio) {
             }
 
             if (!deveDeslocar)
-                break; // posição correta encontrada
+                break; // posição encontrada
 
             // desloca o elemento para a direita
             mochila[j + 1] = mochila[j];
@@ -173,6 +173,28 @@ int ordenarMochila(Item mochila[], int total, CriterioOrdenacao criterio) {
     return comparacoes;
 }
 
+// Binaria requer que o vetor esteja ordenado por nome 
+int buscaBinariaPorNome(Item mochila[], int total, char nomeBusca[]) {
+    int inicio = 0;
+    int fim = total - 1;
+
+    while (inicio <= fim) {
+        int meio = (inicio + fim) / 2;
+        int cmp = strcmp(mochila[meio].nome, nomeBusca);
+
+        if (cmp == 0) {
+            return meio; // encontrado
+        } else if (cmp < 0) {
+            // mochila[meio].nome < nomeBusca -> procurar à direita
+            inicio = meio + 1;
+        } else {
+            // mochila[meio].nome > nomeBusca -> procurarà esquerda
+            fim = meio - 1;
+        }
+    }
+
+    return -1; // nao encontrado
+}
 
     return 0;
 }
