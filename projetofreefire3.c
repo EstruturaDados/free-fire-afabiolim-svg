@@ -122,3 +122,56 @@ void listarItens(Item mochila[], int total) {
                mochila[i].prioridade);
     }
 }
+
+
+// função ordena a mochila
+int ordenarMochila(Item mochila[], int total, CriterioOrdenacao criterio) {
+    int comparacoes = 0;
+
+    // Insertion sort: percorre do segundo elemento até o final
+    for (int i = 1; i < total; i++) {
+        Item atual = mochila[i]; // elemento que vamos "inserir" na sublista ordenada
+        int j = i - 1;
+
+        // Enquanto j >= 0 e a condicao de troca for verdadeira, deslocamos
+        while (j >= 0) {
+            comparacoes++; // contamos cada comparacao feita para decidir se desloca
+
+            bool deveDeslocar = false; // flag para determina se deslocamos da mochila
+
+            if (criterio == ORDENAR_NOME) {
+                if (strcmp(mochila[j].nome, atual.nome) > 0)
+                    deveDeslocar = true;
+            } else if (criterio == ORDENAR_TIPO) {
+                // ordenar por tipo 
+                if (strcmp(mochila[j].tipo, atual.tipo) > 0)
+                    deveDeslocar = true;
+                else if (strcmp(mochila[j].tipo, atual.tipo) == 0) {
+                    // Critério secundário: se os tipos forem iguais, ordenar nome
+                    if (strcmp(mochila[j].nome, atual.nome) > 0)
+                        deveDeslocar = true;
+                }
+            } else if (criterio == ORDENAR_PRIORIDADE) {
+                // Ordenamos por prioridade crescente (1 -> 5). 
+                if (mochila[j].prioridade > atual.prioridade)
+                    deveDeslocar = true;
+                else if (mochila[j].prioridade == atual.prioridade) {
+                    // Critério secundário: se prioridades iguais ordenar por nome
+                    if (strcmp(mochila[j].nome, atual.nome) > 0)
+                        deveDeslocar = true;
+                }
+            }
+
+            if (!deveDeslocar)
+                break; // posição correta encontrada
+
+            // desloca o elemento para a direita
+            mochila[j + 1] = mochila[j];
+            j--;
+        }
+
+        mochila[j + 1] = atual; // insere o elemento na posiçã
+    }
+
+    return comparacoes;
+}
