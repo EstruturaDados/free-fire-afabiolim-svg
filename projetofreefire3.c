@@ -1,18 +1,20 @@
 #include <stdio.h>
 #include <string.h>
-#include <stdbool.h> // usar bool, true, false
+#include <stdbool.h> // para usar bool, true, false
 
 #define MAX_ITENS 10
 
-// Ordenação
+
+
+// Representa os criterios de ordenacao.
 typedef enum {
     ORDENAR_NOME = 1,
     ORDENAR_TIPO,
     ORDENAR_PRIORIDADE
 } CriterioOrdenacao;
 
-
-//estrutura da mochila
+// Estrutura que representa cada item da mochila.
+// nome, tipo, quantidade e prioridade (1 a 5).
 typedef struct {
     char nome[30];
     char tipo[20];
@@ -21,7 +23,12 @@ typedef struct {
 } Item;
 
 
-// Função que exibe um item
+// Função para imprimir uma linha 
+void linha() {
+    printf("------------------------------------------------------------\n");
+}
+
+// Função que exibe um item (formato amigável).
 void exibirItem(Item it) {
     printf("Nome: %s\n", it.nome);
     printf("Tipo: %s\n", it.tipo);
@@ -29,14 +36,16 @@ void exibirItem(Item it) {
     printf("Prioridade: %d\n", it.prioridade);
 }
 
-// Adiciona um item na mochila 
+
+
+// Adiciona um item na mochila
 void adicionarItem(Item mochila[], int *total) {
     if (*total >= MAX_ITENS) {
         printf(" Mochila cheia! Nao e possivel adicionar mais itens.\n");
         return;
     }
 
-    // Leitura dos item
+    // Leitura dos campos do item
     printf("Nome do item: ");
     fgets(mochila[*total].nome, sizeof(mochila[*total].nome), stdin);
     mochila[*total].nome[strcspn(mochila[*total].nome, "\n")] = '\0';
@@ -48,7 +57,7 @@ void adicionarItem(Item mochila[], int *total) {
     printf("Quantidade: ");
     scanf("%d", &mochila[*total].quantidade);
 
-    // Ler prioridade 1..5
+    // Ler prioridade e garantir que esteja no intervalo 1..5
     do {
         printf("Prioridade (1 a 5): ");
         scanf("%d", &mochila[*total].prioridade);
@@ -58,11 +67,11 @@ void adicionarItem(Item mochila[], int *total) {
 
     getchar(); // limpar o '\n' restante no buffer após scanf
     (*total)++;
-    printf("Item adicionado com sucesso!\n");
+    printf(" Item adicionado com sucesso!\n");
 }
 
-// Remove um item pelo nome
-// Desloca os itens seguintes para preencher o espaço.
+// Remove um item pelo nome.
+// desloca os itens seguintes para preencher o espaço.
 void removerItem(Item mochila[], int *total) {
     if (*total == 0) {
         printf(" Mochila vazia! Nada para remover.\n");
@@ -74,4 +83,23 @@ void removerItem(Item mochila[], int *total) {
     fgets(nomeRemover, sizeof(nomeRemover), stdin);
     nomeRemover[strcspn(nomeRemover, "\n")] = '\0';
 
-    
+    int pos = -1;
+    for (int i = 0; i < *total; i++) {
+        if (strcmp(mochila[i].nome, nomeRemover) == 0) {
+            pos = i;
+            break;
+        }
+    }
+
+    if (pos == -1) {
+        printf(" Item nao encontrado.\n");
+        return;
+    }
+
+    // Desloca os itens para a esquerda para "remover" o item
+    for (int j = pos; j < *total - 1; j++) {
+        mochila[j] = mochila[j + 1];
+    }
+    (*total)--;
+    printf(" Item '%s' removido.\n", nomeRemover);
+}
